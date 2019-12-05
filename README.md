@@ -9,6 +9,11 @@ This is a Docker container to be able to cross compile Golang packages with enab
 * Linux (amd64, ARMv6, ARMv7, ARM64)
 * OSX (amd64)
 
+### Used versions
+* **GoLang**: 1.13.5
+* **GoReleaser**: 0.123.3
+
+
 ### Docker
 
 [Docker hub](https://hub.docker.com/r/iotmod/goreleaser-cgo-cross-compiler)
