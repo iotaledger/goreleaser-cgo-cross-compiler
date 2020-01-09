@@ -25,6 +25,13 @@ RUN  wget ${GOLANG_DOWNLOAD_URL}; \
 			tar -xzf $GOLANG_DOWNLOAD_FILE -C /usr/local; \
 			rm $GOLANG_DOWNLOAD_FILE; 
 
+RUN  wget -O /usr/bin/x86_64-musl $MUSL_x86_64_DOWNLOAD; \
+			chmod +x /usr/bin/x86_64-musl;
+RUN	 wget -O /usr/bin/aarch64-musl ${MUSL_AARCH64_DOWNLOAD}; \
+			chmod +x /usr/bin/aarch64-musl;
+RUN	 wget -O /usr/bin/armhf-musl ${MUSL_ARMHF_DOWNLOAD}; \
+			chmod +x /usr/bin/armhf-musl;
+
 RUN apt-get update && apt-get install -y build-essential \
 			gcc-arm-linux-gnueabi g++-arm-linux-gnueabi gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf \
 			libc6-dev-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev \
@@ -33,9 +40,6 @@ RUN apt-get update && apt-get install -y build-essential \
 	apt-get -y autoremove && \
 	wget -O docker.tgz "https://download.docker.com/linux/static/stable/x86_64/docker-19.03.5.tgz" && \
 	tar --extract --file docker.tgz --strip-components 1 --directory /usr/local/bin/ && \
-	rm docker.tgz && \
-	wget -O /usr/local/bin/x86_64-musl-gcc "$MUSL_x86_64_DOWNLOAD" && \
-	wget -O /usr/local/bin/aarch64-musl-gcc "${MUSL_AARCH64_DOWNLOAD}" && \
-	wget -O /usr/local/bin/armhf-musl-gcc "${MUSL_ARMHF_DOWNLOAD}"
+	rm docker.tgz
 
 CMD ["goreleaser", "-v"]
