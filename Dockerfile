@@ -10,6 +10,10 @@ ENV GOLANG_SHA=512103d7ad296467814a6e3f635631bd35574cab3369a97a323c9a585ccaa569
 ENV GOLANG_DOWNLOAD_FILE=go${GOLANG_VERSION}.linux-amd64.tar.gz
 ENV GOLANG_DOWNLOAD_URL=https://dl.google.com/go/${GOLANG_DOWNLOAD_FILE}
 
+ENV MUSL_x86_64_DOWNLOAD=https://cross.iotmod.de/x86_64-linux-musl-gcc-9.2.1
+ENV MUSL_AARCH64_DOWNLOAD=https://cross.iotmod.de/aarch64-linux-musl-gcc-9.2.1
+ENV MUSL_ARMHF_DOWNLOAD=https://cross.iotmod.de/arm-linux-musleabihf-gcc-9.2.1
+
 RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
 			echo "$GORELEASER_SHA $GORELEASER_DOWNLOAD_FILE" | sha256sum -c - || exit 1; \
 			tar -xzf $GORELEASER_DOWNLOAD_FILE -C /usr/bin/ goreleaser; \
@@ -29,6 +33,9 @@ RUN apt-get update && apt-get install -y build-essential \
 	apt-get -y autoremove && \
 	wget -O docker.tgz "https://download.docker.com/linux/static/stable/x86_64/docker-19.03.5.tgz" && \
 	tar --extract --file docker.tgz --strip-components 1 --directory /usr/local/bin/ && \
-	rm docker.tgz
+	rm docker.tgz && \
+	wget -O /usr/local/bin/x86_64-musl-gcc "$MUSL_x86_64_DOWNLOAD" && \
+	wget -O /usr/local/bin/aarch64-musl-gcc "${MUSL_AARCH64_DOWNLOAD}" && \
+	wget -O /usr/local/bin/armhf-musl-gcc "${MUSL_ARMHF_DOWNLOAD}"
 
 CMD ["goreleaser", "-v"]
