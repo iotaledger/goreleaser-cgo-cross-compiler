@@ -25,5 +25,5 @@ docker run --rm --privileged \
   -v $PWD:/go/src/gitlab.com/[project]/[repo] \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -w /go/src/github.com/[project]/[repo] \
-  iotmod/goreleaser-cgo-cross-compiler:1.13.5-musl goreleaser --snapshot --rm-dist
+  iotmod/goreleaser-cgo-cross-compiler:latest goreleaser --snapshot --rm-dist
 ```
