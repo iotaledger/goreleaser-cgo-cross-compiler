@@ -1,10 +1,12 @@
 FROM golang:1.13.7-buster
 
+# GoReleaser
 ENV GORELEASER_VERSION=0.126.0
 ENV GORELEASER_SHA=6c0145df61140ec1bffe4048b9ef3e105e18a89734816e7a64f342d3f9267691
 ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
 ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
 
+# MUSL
 ENV MUSL_x86_64_DOWNLOAD_FILE=x86_64-linux-musl-native.tgz
 ENV MUSL_x86_64_DOWNLOAD=https://cross.iotmod.de/${MUSL_x86_64_DOWNLOAD_FILE}
 ENV MUSL_AARCH64_DOWNLOAD_FILE=aarch64-linux-musl-cross.tgz
@@ -14,11 +16,13 @@ ENV MUSL_ARMHF_DOWNLOAD=https://cross.iotmod.de/${MUSL_ARMHF_DOWNLOAD_FILE}
 ENV MUSL_ARMV7L_DOWNLOAD_FILE=armv7l-linux-musleabihf-cross.tgz
 ENV MUSL_ARMV7L_DOWNLOAD=https://cross.iotmod.de/${MUSL_ARMV7L_DOWNLOAD_FILE}
 
+# Download GoReleaser
 RUN  wget ${GORELEASER_DOWNLOAD_URL}; \
 	echo "$GORELEASER_SHA $GORELEASER_DOWNLOAD_FILE" | sha256sum -c - || exit 1; \
 	tar -xzf $GORELEASER_DOWNLOAD_FILE -C /usr/bin/ goreleaser; \
 	rm $GORELEASER_DOWNLOAD_FILE;
 
+# Download MUSL
 RUN  mkdir /etc/musl;
 
 RUN  wget ${MUSL_x86_64_DOWNLOAD}; \
@@ -34,8 +38,10 @@ RUN	 wget ${MUSL_ARMV7L_DOWNLOAD}; \
 	tar -xzf ${MUSL_ARMV7L_DOWNLOAD_FILE} -C /etc/musl/; \
 	rm ${MUSL_ARMV7L_DOWNLOAD_FILE};
 
-ENV PATH=${PATH}:/etc/musl/x86_64-linux-musl-native/bin:/etc/musl/aarch64-linux-musl-cross/bin:/etc/musl/arm-linux-musleabihf-cross/bin:/etc/musl/armv7l-linux-musleabihf-cross/bin;
+# Add MUSL to PATH
+ENV PATH=${PATH}:/etc/musl/x86_64-linux-musl-native/bin:/etc/musl/aarch64-linux-musl-cross/bin:/etc/musl/arm-linux-musleabihf-cross/bin:/etc/musl/armv7l-linux-musleabihf-cross/bin
 
+# Install cross compiling tools
 RUN apt-get update && apt-get install -y build-essential \
 	gcc-arm-linux-gnueabi g++-arm-linux-gnueabi gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf \
 	libc6-dev-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev \
