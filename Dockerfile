@@ -23,7 +23,7 @@ ENV MUSL_ARMV7L_DOWNLOAD_FILE=armv7l-linux-musleabihf-cross.tgz
 ENV MUSL_ARMV7L_DOWNLOAD=https://cross.iotmod.de/${MUSL_ARMV7L_DOWNLOAD_FILE}
 
 # Install cross compiling tools
-RUN apt-get update && apt-get install -y build-essential wget \
+RUN apt-get update && apt-get install -y build-essential wget git \
 	gcc-arm-linux-gnueabi g++-arm-linux-gnueabi gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf \
 	libc6-dev-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev \
 	gcc-mingw-w64 g++-mingw-w64 \
