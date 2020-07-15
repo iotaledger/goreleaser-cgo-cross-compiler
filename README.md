@@ -12,8 +12,8 @@ This is a Docker container to be able to cross compile Golang packages with enab
 
 ### Used versions
 
-- **GoLang**: 1.14.4
-- **GoReleaser**: 0.137.0
+- **GoLang**: 1.14.5
+- **GoReleaser**: 0.140.0
 - **MUSL**: 2019-12-20 Release
 
 ### Docker
