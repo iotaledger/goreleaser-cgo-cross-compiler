@@ -7,23 +7,24 @@ This is a Docker container to be able to cross compile Golang packages with enab
 ### Supported OS and architectures:
 
 - Windows (amd64)
-- Linux (amd64, ARMv7, ARM64)
+- Linux (amd64, ARM64)
 - macOS (amd64) **No CGO support**
 
 ### Used versions
 
 - **GoLang**: 1.16.3
 - **GoReleaser**: 0.164.0
+- **Docker**: 20.10.6
 - **MUSL**: 2021-03-04 Release
 
 ### Docker
 
-[Docker hub](https://hub.docker.com/r/iotmod/goreleaser-cgo-cross-compiler)
+[Docker hub](https://hub.docker.com/r/gohornet/goreleaser-cgo-cross-compiler)
 
 ```Docker
 docker run --rm --privileged \
-  -v $PWD:/go/src/gitlab.com/[project]/[repo] \
+  -v $PWD:/go/src/github.com/[project]/[repo] \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -w /go/src/github.com/[project]/[repo] \
-  iotmod/goreleaser-cgo-cross-compiler:latest goreleaser --snapshot --rm-dist
+  gohornet/goreleaser-cgo-cross-compiler:latest goreleaser --snapshot --rm-dist
 ```
