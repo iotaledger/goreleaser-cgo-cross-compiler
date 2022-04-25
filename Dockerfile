@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 # GoReleaser
 ENV GORELEASER_VERSION=1.8.3
