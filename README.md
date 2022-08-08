@@ -19,12 +19,12 @@ This is a Docker container to be able to cross compile Golang packages with enab
 
 ### Docker
 
-[Docker hub](https://hub.docker.com/r/gohornet/goreleaser-cgo-cross-compiler)
+[Docker hub](https://hub.docker.com/r/iotaledger/goreleaser-cgo-cross-compiler)
 
 ```Docker
 docker run --rm --privileged \
   -v $PWD:/go/src/github.com/[project]/[repo] \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -w /go/src/github.com/[project]/[repo] \
-  gohornet/goreleaser-cgo-cross-compiler:latest goreleaser --snapshot --rm-dist
+  iotaledger/goreleaser-cgo-cross-compiler:latest goreleaser --snapshot --rm-dist
 ```

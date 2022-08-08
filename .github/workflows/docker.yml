@@ -16,7 +16,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: gohornet/goreleaser-cgo-cross-compiler
+          images: iotaledger/goreleaser-cgo-cross-compiler
           tags: |
             type=ref,event=tag
 
