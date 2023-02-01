@@ -1,28 +1,36 @@
 FROM debian:11
 
 # GoReleaser
-ENV GORELEASER_VERSION=1.13.1
-ENV GORELEASER_SHA=136fecfb2e2f3a7965274ad5e2571985d8b2fa724b6536874f082e4b0bb9f344
+ENV GORELEASER_VERSION=1.15.0
+ENV GORELEASER_SHA=0cc69ee51335d1e5391298a8474c5731f608ed9e03a18c6747efe5d5e2dd4f41
 ENV GORELEASER_DOWNLOAD_FILE=goreleaser_Linux_x86_64.tar.gz
 ENV GORELEASER_DOWNLOAD_URL=https://github.com/goreleaser/goreleaser/releases/download/v${GORELEASER_VERSION}/${GORELEASER_DOWNLOAD_FILE}
 
 # Golang
-ENV GOLANG_VERSION=1.19.4
-ENV GOLANG_SHA=c9c08f783325c4cf840a94333159cc937f05f75d36a8b307951d5bd959cf2ab8
+ENV GOLANG_VERSION=1.19.5
+ENV GOLANG_SHA=36519702ae2fd573c9869461990ae550c8c0d955cd28d2827a6b159fda81ff95
 ENV GOLANG_DOWNLOAD_FILE=go${GOLANG_VERSION}.linux-amd64.tar.gz
 ENV GOLANG_DOWNLOAD_URL=https://dl.google.com/go/${GOLANG_DOWNLOAD_FILE}
 
 # Docker
-ENV DOCKER_VERSION=20.10.21
-ENV DOCKER_SHA=2582bed8772b283bda9d4565c0af76ee653c93d93dc6b8d0aad795d731a1bb81
+ENV DOCKER_VERSION=20.10.23
+ENV DOCKER_SHA=0ee39f72cc434137d294c14d30897826bad6e24979e421f51a252769ad37e6d1
 ENV DOCKER_DOWNLOAD_FILE=docker-${DOCKER_VERSION}.tgz
 ENV DOCKER_DOWNLOAD_URL=https://download.docker.com/linux/static/stable/x86_64/${DOCKER_DOWNLOAD_FILE}
 
 # Install cross compiling tools
-RUN apt-get update && apt-get install -y build-essential wget git cmake \
-	libc6-dev-armel-cross libc6-dev-armel-cross binutils-arm-linux-gnueabi libncurses5-dev \
-	gcc-mingw-w64 g++-mingw-w64 \
-	gcc-aarch64-linux-gnu g++-aarch64-linux-gnu && \
+RUN apt-get update && apt-get install -y \
+	build-essential \
+	wget \
+	git \
+	cmake \
+	libc6-dev-armel-cross \
+	binutils-arm-linux-gnueabi \
+	libncurses5-dev \
+	gcc-mingw-w64 \
+	g++-mingw-w64 \
+	gcc-aarch64-linux-gnu \
+	g++-aarch64-linux-gnu && \
 	apt-get -y autoremove
 
 # Download Docker
