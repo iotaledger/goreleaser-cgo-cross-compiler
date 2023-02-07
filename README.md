@@ -25,5 +25,5 @@ docker run --rm --privileged \
   -v $PWD:/go/src/github.com/[project]/[repo] \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -w /go/src/github.com/[project]/[repo] \
-  iotaledger/goreleaser-cgo-cross-compiler:latest goreleaser --snapshot --rm-dist
+  iotaledger/goreleaser-cgo-cross-compiler:latest goreleaser --snapshot --clean
 ```
